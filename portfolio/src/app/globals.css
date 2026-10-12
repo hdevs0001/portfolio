@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* Class-based dark mode: <html class="dark"> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---- Theme tokens (light is default, .dark overrides) ---- */
+:root {
+  --background: #ffffff;
+  --foreground: #09090b;
+  --muted: #5c5c66;
+  --line: rgba(0, 0, 0, 0.12);
+  --grid: rgba(0, 0, 0, 0.05);
+  color-scheme: light;
+}
+:root.dark {
+  --background: #000000;
+  --foreground: #fafafa;
+  --muted: #a3a3a3;
+  --line: rgba(255, 255, 255, 0.14);
+  --grid: rgba(255, 255, 255, 0.06);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scrolling */
+}
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+::selection {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+/* Centered single column used by every section (change width here) */
+.page-col {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 900px;
+  padding-inline: 1.25rem;
+}
+
+/* ---- Intro states (set on <html data-intro="play|done"> by the boot script) ---- */
+.intro-overlay {
+  display: none;
+}
+html[data-intro="play"] .intro-overlay {
+  display: flex;
+}
+html[data-intro="play"],
+html[data-intro="play"] body {
+  overflow: hidden;
+}
+html[data-intro="play"] [data-hero-item] {
+  opacity: 0;
+}
+
+/* ---- Mobile menu panel: closed state, GSAP animates it open ---- */
+.menu-panel {
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Page grid + banner placeholder */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, #000 30%, transparent 95%);
+}
+.banner-placeholder {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--foreground) 16%, transparent),
+    color-mix(in srgb, var(--foreground) 3%, transparent)
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
