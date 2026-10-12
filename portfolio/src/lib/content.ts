@@ -120,5 +120,9 @@ export const socials: SocialLink[] = [
   },
   { label: "GitHub", href: "https://github.com/hdevs0001", icon: "github" },
   { label: "Email", href: `mailto:${siteConfig.email}`, icon: "mail" },
-  { label: "Resume", href: "/resume.pdf", icon: "resume" },
+  {
+    label: "Resume",
+    href: "/resume.pdf",
+    icon: "resume",
+  },
 ];
