@@ -8,7 +8,7 @@ import "./globals.css";
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "GPT | Software Developer",
+  title: "Harmanpreet Singh | Software Developer",
   description: "Portfolio of a software developer building thoughtful digital experiences.",
 };
 
